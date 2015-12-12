@@ -1,16 +1,8 @@
-FROM       ubuntu:14.04
-MAINTAINER Aleksandar Diklic "https://github.com/rastasheep"
+FROM       sonatype/nexus:oss
 
-RUN apt-get update
 
-RUN apt-get install -y openssh-server
-RUN mkdir /var/run/sshd
+ADD nexus.properties /opt/sonatype/nexus/conf/nexus.properties
 
-RUN echo 'root:root' |chpasswd
-
-RUN sed -ri 's/^PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config
-RUN sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
-
-EXPOSE 22
+EXPOSE 80
 
 CMD    ["/usr/sbin/sshd", "-D"]
