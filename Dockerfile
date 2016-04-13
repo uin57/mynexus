@@ -1,5 +1,4 @@
-FROM sonatype/nexus:oss
-VOLUME /sonatype-work
-ADD nexus.properties /opt/sonatype/nexus/conf/nexus.properties
-EXPOSE 80
-
+FROM nginx:stable-alpine
+MAINTAINER FeelGo
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY htpasswd /usr/share/nginx/html
